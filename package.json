@@ -1,0 +1,23 @@
+{
+  "name": "Backbone.HATEOAS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backbone.hal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ginnamcram/Backbone.HATEOAS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ginnamcram/Backbone.HATEOAS/issues"
+  },
+  "homepage": "https://github.com/ginnamcram/Backbone.HATEOAS#readme",
+  "devDependencies": {
+    "webpack": "^4.0.1"
+  }
+}
