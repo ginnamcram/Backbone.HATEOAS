@@ -1,20 +1,27 @@
+import _ from 'underscore';
+
 _.mixin({
-    capitalize: function(string) {
+    capitalize(string) {
       return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     },
-    capitalizeName: function(string) {
+
+    capitalizeName(string) {
       var parts = _.map(string.split('-'), function(part){
         return _(part).capitalize();
       });
       return parts.join('');
     },
-    uncapitalize: function(string) {
+
+    uncapitalize(string) {
       return string.charAt(0).toLowerCase() + string.substring(1);
     },
-    uncapitalizeName: function(string) {
+
+    uncapitalizeName(string) {
       var parts = _.map(string.split('-'), function(part){
         return _(part).capitalize();
       });
       return _(parts.join('')).uncapitalize();
     }
 });
+
+export default _;
