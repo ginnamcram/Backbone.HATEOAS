@@ -2,7 +2,7 @@
   "name": "hate2love",
   "version": "1.0.0",
   "description": "",
-  "main": "backbone.hal.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
