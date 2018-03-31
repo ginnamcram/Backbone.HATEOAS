@@ -20,7 +20,7 @@ var Collection = {
         delete object._embedded;
         //now set attributes
         this.attributes     = object || {};
-        //get hall constructor
+        //get items from hall response
         if(this.model.clazz){
           return this.embedded[this._name];
         }
