@@ -203,4 +203,4 @@ Backbone.HAL = {
 
 Backbone.HAL.Model = Model;
 Backbone.HAL.Collection = Collection;
-return Backbone.HAL;
+export default Backbone.HAL;
