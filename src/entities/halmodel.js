@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import Backbone from  'backbone';
-import helper from '../util/helper';
+import Helper from '../util/helper';
 import Links from './hallinks';
 
 
@@ -22,7 +22,7 @@ var Model = {
       throw 'link does not exist for property: ' + propertyName;
     }
     if(value.href.replace('{?projection}','') != this.url()){
-      return helper.createLinkResolver(propertyName, value.href, this);
+      return Helper.createLinkResolver(propertyName, value.href, this);
     }
     return null;
   },
@@ -32,7 +32,7 @@ var Model = {
     var me = this;
     _.each(this.links,function(value,name){
       if(value.href.replace('{?projection}','') != this.url()){
-        linksToFetch.push( helper.createLinkResolver(name, value.href, this) );
+        linksToFetch.push( Helper.createLinkResolver(name, value.href, this) );
       }
     },this);
     return Promise.all(linksToFetch);
@@ -91,7 +91,7 @@ var Model = {
       if (!_.isEmpty(links)) {
           //cloned._links = links;
       }
-      return _.mapObject(cloned, helper.resolveModelReference);
+      return _.mapObject(cloned, Helper.resolveModelReference);
       //return links to subresources instead of objects
       for (var field in cloned) {
         var value = cloned[field];
