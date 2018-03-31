@@ -8,10 +8,12 @@ import Links from './hallinks';
 var Model = {
 
   parse(attributes) {
-      attributes = attributes || {};
-      this.links = attributes._links || {};
+      attributes      = attributes || {};
+      //copy hal link + embedded
+      this.links      = attributes._links || {};
+      this.embedded   = attributes._embedded || {};
+      //remove from message
       delete attributes._links;
-      this.embedded = attributes._embedded || {};
       delete attributes._embedded;
       return attributes;
   },
@@ -54,10 +56,14 @@ var Model = {
           return true;
       }
   },
-
+  /**
+   * creates a new object from e existing
+   * @returns the model itself
+   */
   makeNew(){
     this.unset(this.idAttribute, {silent:true});
     this.removeLink('self');
+    return this;
   },
 
   /**
@@ -80,32 +86,34 @@ var Model = {
   },
 
   toJSON: function () {
-      var links = this.getLinks(),
-          embedded = this.getEmbedded(),
-          cloned;
+    var links     = this.getLinks(),
+        embedded  = this.getEmbedded(),
+        cloned;
 
-      cloned = _.clone(this.attributes);
-      if (!_.isEmpty(embedded)) {
-          //cloned._embedded = embedded;
-      }
-      if (!_.isEmpty(links)) {
-          //cloned._links = links;
-      }
-      return _.mapObject(cloned, Helper.resolveModelReference);
-      //return links to subresources instead of objects
-      for (var field in cloned) {
-        var value = cloned[field];
-        if(_.isArray(value)){
-          cloned[field] = _.map(value, function(valueItem){
-            return _.has(valueItem,'cid')?valueItem.url():valueItem;
-          });
-        }else{
-          if(_.has(value,'cid')){
-            cloned[field] = value.url();
-          }
+    cloned = _.clone(this.attributes);
+    if (!_.isEmpty(embedded)) {
+        //cloned._embedded = embedded;
+    }
+    if (!_.isEmpty(links)) {
+        //cloned._links = links;
+    }
+    return _.mapObject(cloned, Helper.resolveModelReference);
+    /*
+    //return links to subresources instead of objects
+    for (var field in cloned) {
+      var value = cloned[field];
+      if(_.isArray(value)){
+        cloned[field] = _.map(value, function(valueItem){
+          return _.has(valueItem,'cid')?valueItem.url():valueItem;
+        });
+      }else{
+        if(_.has(value,'cid')){
+          cloned[field] = value.url();
         }
       }
-      return cloned;
+    }
+    return cloned;
+    */
   }
 
 };
