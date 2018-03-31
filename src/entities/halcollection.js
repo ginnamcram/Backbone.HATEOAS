@@ -1,4 +1,9 @@
-var Collection = Backbone.Collection.extend(_.extend({
+import _ from 'underscore';
+import Backbone from  'backbone';
+import Links from './hallinks';
+
+
+var Collection = {
     constructor: function (models, options) {
         if (!_.isArray(models)) {
             models = this.parse(_.clone(models));
@@ -6,15 +11,20 @@ var Collection = Backbone.Collection.extend(_.extend({
         Collection.__super__.constructor.call(this, models, options);
     },
     parse: function (object) {
-        object = object || {};
-        this.links = object._links || {};
+        object              = object || {};
+        //copy references
+        this.links          = object._links || {};
+        this.embedded       = object._embedded || {};
+        //remove links and embedded from message
         delete object._links;
-        this.embedded = object._embedded || {};
         delete object._embedded;
-        this.attributes = object || {};
+        //now set attributes
+        this.attributes     = object || {};
+        //get hall constructor
         if(this.model.clazz){
           return this.embedded[this._name];
         }
+        //default
         return this.embedded.items;
     },
     reset: function (obj, options) {
@@ -33,4 +43,10 @@ var Collection = Backbone.Collection.extend(_.extend({
             return Collection.__super__.url.call(this);
         }
     }
-}, Links));
+};
+//add hall links
+Collection = _.extend(Collection, Links);
+
+Collection = Backbone.Collection.extend(Collection);
+
+export default Collection;
