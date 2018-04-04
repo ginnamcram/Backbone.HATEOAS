@@ -106,7 +106,7 @@ Backbone.HAL = {
             if(prop.type == 'SEMANTIC'){
                 if( !_.has(protoProps.defaults, prop.name)){
                 //set as property
-                protoProps.defaults[prop.name] = '';
+                protoProps.defaults[prop.name] = null;
                 }
             }
             if(prop.type == 'SAFE'){
