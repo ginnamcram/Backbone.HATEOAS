@@ -1,7 +1,7 @@
 import Backbone from  'backbone';
 import Model from './entities/halmodel';
 import Collection from './entities/halcollection';
-
+import _ from './util/mixins';
 // stores the additional class properties added
 // with Backbone.HAL.extend for a HAL model or collection
 var _predefinedClasses = {};
